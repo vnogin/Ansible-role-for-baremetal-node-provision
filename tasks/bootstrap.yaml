@@ -1,7 +1,0 @@
-- name: Install needed packages
-  become: yes
-  apt: name={{item}} state=present
-  with_items:
-   - language-pack-en
-   - mdadm
-   - lvm2

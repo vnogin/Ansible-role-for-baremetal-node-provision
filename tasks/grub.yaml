@@ -1,3 +1,0 @@
-- name: configure bootloader
-  become: yes
-  script: install_grub.sh {{ ironic_root_device }} {{ parts.created.root }} {{ parts.created.boot }}
