@@ -60,8 +60,10 @@
   - name: software raid - filesystem creation
     become: yes
     filesystem:
-      fstype: "ext2"
+      fstype: "ext4"
       dev: "{{ item }}"
     with_items: 
-     - /dev/md0
-     - /dev/mapper/vg0-root_standard
+#     - /dev/md0
+#     - /dev/mapper/vg0-root_standard
+      - {{ parts.created.boot }}
+      - {{ parts.created.root }}

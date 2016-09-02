@@ -12,7 +12,7 @@ ironic_root_device: "/dev/sda"
 parts:
   created:
     root: "/dev/mapper/vg0-root_standard"
-    boot: "/dev/sda1"
+    boot: "/dev/md0"
 image:
   disk_format: "qcow2"
   mem_req: 10000
