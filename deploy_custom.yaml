@@ -5,27 +5,6 @@
   gather_facts: no
   roles:
     - wait
-# FIXME Move vars to role/defaults
-- hosts: ironic
-  vars:
-    raid_devices:
-    - device: /dev/md0
-    - device: /dev/md1
-    - device: /dev/md2
-    raid_partitions:
-    - partitions: /dev/sda1 /dev/sdb1
-    - partitions: /dev/sda2 /dev/sdb2
-    - partitions: /dev/sda3 /dev/sdb3
-    ironic_image_target: "/dev/mapper/vg0-root_standard"
-    ironic_root_device: "/dev/sda"
-    parts:
-      created:
-        root: "/dev/mapper/vg0-root_standard"
-        boot: "/dev/sda1"
-    image:
-      url: "http://172.16.166.15:8080/shadoff1.qcow2"
-      disk_format: "qcow2"
-      mem_req: 10000
   roles:
     - deploy_custom
     - shutdown

@@ -1,0 +1,18 @@
+---
+raid_devices:
+  - device: /dev/md0
+  - device: /dev/md1
+  - device: /dev/md2
+raid_partitions:
+  - partitions: /dev/sda1 /dev/sdb1
+  - partitions: /dev/sda2 /dev/sdb2
+  - partitions: /dev/sda3 /dev/sdb3
+ironic_image_target: "/dev/mapper/vg0-root_standard"
+ironic_root_device: "/dev/sda"
+parts:
+  created:
+    root: "/dev/mapper/vg0-root_standard"
+    boot: "/dev/sda1"
+image:
+  disk_format: "qcow2"
+  mem_req: 10000
