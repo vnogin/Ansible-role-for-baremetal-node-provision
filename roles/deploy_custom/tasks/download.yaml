@@ -6,6 +6,6 @@
   get_url:
     url: "{{ image.url }}"
     dest: /tmp/{{ inventory_hostname }}.img
-    checksum: "md5:{{ image.checksum|default(omit) }}"
+    checksum: "{{ image.checksum|default(omit) }}"
   async: 600
   poll: 15
