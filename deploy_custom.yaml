@@ -5,7 +5,7 @@
   gather_facts: no
   roles:
     - wait
-
+# FIXME Move vars to role/defaults
 - hosts: ironic
   vars:
     raid_devices:
