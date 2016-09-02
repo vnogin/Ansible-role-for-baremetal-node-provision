@@ -3,6 +3,7 @@
 # code from DIB bash ramdisk
 readonly target_disk=$1
 readonly root_part=$2
+# FIXME Need to distinguish root_boot variavle to block boot device and raid device
 readonly root_boot=$3
 readonly root_part_mount=/mnt/rootfs
 CHROOT_CMD="chroot $root_part_mount /bin/bash -c"
@@ -23,7 +24,7 @@ mkdir -p $root_part_mount/boot
 mkdir -p $root_part_mount/dev
 mkdir -p $root_part_mount/sys
 mkdir -p $root_part_mount/proc
-
+# FIXME need to use raid device instead of block device which is RAID member
 mount $root_boot $root_part_mount/boot
 mount -o bind /dev $root_part_mount/dev
 mount -o bind /sys $root_part_mount/sys
@@ -42,7 +43,7 @@ fi
 ret=1
 if ${CHROOT_CMD} "/usr/sbin/grub$V-install ${target_disk}"; then
     echo "Generating the grub configuration file"
-
+# FIXME Remove hardcoded path
     cat << EOF > $root_part_mount/etc/grub.d/09_swraid1_setup
 #!/bin/sh
 exec tail -n +3 $0
@@ -63,7 +64,7 @@ menuentry 'Ubuntu' --class ubuntu --class gnu-linux --class gnu --class os {
         linux   /boot/vmlinuz-4.2.0-27-generic root=/dev/mapper/vg0-root_standard ro   nomdmonddf nomdmonisw
         initrd  /boot/initrd.img-4.2.0-27-generic
 EOF
-
+# FIXME Remove hardcoded path
 cat << EOF > $root_part_mount/etc/fstab
 /dev/mapper/vg0-root_standard /               ext4    errors=remount-ro 0       1
 /dev/md0 /boot           		      ext4    defaults        0       2
