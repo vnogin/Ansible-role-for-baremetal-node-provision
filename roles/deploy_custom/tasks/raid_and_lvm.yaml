@@ -63,7 +63,7 @@
       fstype: "ext4"
       dev: "{{ item }}"
     with_items: 
-#     - /dev/md0
-#     - /dev/mapper/vg0-root_standard
       - "{{ parts.created.boot }}"
       - "{{ parts.created.root }}"
+# TODO Vitaliy:
+# - add SWAP partition
