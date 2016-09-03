@@ -65,6 +65,7 @@ menuentry 'Ubuntu' --class ubuntu --class gnu-linux --class gnu --class os {
         initrd  /boot/initrd.img-4.2.0-27-generic
 EOF
 # FIXME Remove hardcoded path
+# TODO Add SWAP partition to fstab
 cat << EOF > $root_part_mount/etc/fstab
 /dev/mapper/vg0-root_standard /               ext4    errors=remount-ro 0       1
 /dev/md0 /boot           		      ext4    defaults        0       2
