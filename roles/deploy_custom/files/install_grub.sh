@@ -18,7 +18,7 @@ if [ $? != "0" ]; then
    exit 1
 fi
 mkdir -p /tmp/boot
-cp -r $root_part_mount/boot/ /tmp/boot/
+cp -r $root_part_mount/boot/* /tmp/boot/
 
 mkdir -p $root_part_mount/boot
 mkdir -p $root_part_mount/dev
@@ -31,8 +31,11 @@ mount -o bind /sys $root_part_mount/sys
 mount -o bind /proc $root_part_mount/proc
 mount -o bind /run $root_part_mount/run
 
-cp -r /tmp/boot/  $root_part_mount/boot/
+cp -r /tmp/boot/*  $root_part_mount/boot/
 cp /etc/resolv.conf $root_part_mount/etc/
+
+${CHROOT_CMD} "export DEBIAN_FRONTEND=noninteractive && apt-get -y install lvm2 mdadm"
+
 # Find grub version
 V=
 if [ -x $root_part_mount/usr/sbin/grub2-install ]; then
@@ -71,7 +74,6 @@ cat << EOF > $root_part_mount/etc/fstab
 /dev/md0 /boot           		      ext4    defaults        0       2
 EOF
 
-${CHROOT_CMD} "export DEBIAN_FRONTEND=noninteractive && apt-get -y install lvm2 mdadm"
 ${CHROOT_CMD} "update-grub"
 ${CHROOT_CMD} "update-initramfs -u"
 
