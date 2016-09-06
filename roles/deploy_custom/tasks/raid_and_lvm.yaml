@@ -44,6 +44,7 @@
 
 # TODO Vitaliy
 # - Use LVM patitions from defauls. fstype should be defined there as well
+# - Make FS for all partitions
 
   - name: Create LVM group vg0
     become: yes
